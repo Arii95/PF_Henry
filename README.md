@@ -115,10 +115,11 @@ En la página podemos observar:
 
 Y dados esos filtros se muestra un mapa localizando las ubicaciones y los siguientes datos: 
 
-* Distancia recorrida
+* Distancia recorrida a lo largo del día
 * Mapa de la distancia recorrida 
-* Velocidad 
-* Tiempo 
+* Velocidad de movimiento en el pastoreo
+* Tiempo de pastoreo
+* Determinar vacas aisladas en un lapso de tiempo 
 
 ![Mapa](Imagenes/Mapa_recorrido.png) ![Deploy](Imagenes/Deployment.png)
 
