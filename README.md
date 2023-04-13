@@ -84,9 +84,6 @@ En un estudio (Cabezas, 2022) se observó que las conductas que más se observab
 
 Los datos GPS proveído por los collares es almacenado en una base de datos no relacional llamada MongoDB en la cual se van guardando documentos con información sobre las vacas, las caravanas con su señal en decibeles (RSSI), indicador ITH (Indicador de Temperatura Humedad), los asentamientos con sus límites establecidos, los dispositivos que se encuentran en funcionamiento para poder obtener más datos sobre el desplazamiento del ganado. 
 
-<br/>
-
-![Mongo](Imagenes/Mongo.png)
 
 <br/>
 
