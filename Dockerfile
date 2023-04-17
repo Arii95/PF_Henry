@@ -10,8 +10,6 @@ RUN pip3 install matplotlib
 
 RUN pip3 install plotly
 
-RUN pip3 install math
-
 RUN pip3 install geopandas 
 
 RUN pip3 install json
