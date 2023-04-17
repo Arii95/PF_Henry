@@ -30,8 +30,4 @@ RUN pip3 install json
 
 RUN pip3 install sklearn
 
-RUN pip3 install JSONResponse
-
-RUN pip3 installjsonable_encoder
-
 COPY ./app .
