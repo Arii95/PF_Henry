@@ -18,7 +18,7 @@ RUN pip3 install geopandas
 
 RUN pip3 install datetime
 
-RUN pip3 installstring
+RUN pip3 install string
 
 RUN pip3 install random
 
