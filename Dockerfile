@@ -1,21 +1,21 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi
 
-RUN pip3 install fastapi
+RUN pip install fastapi
 
-RUN pip3 install pandas
+RUN pip install pandas
 
-RUN pip3 install pymongo
+RUN pip install pymongo
 
-RUN pip3 install matplotlib
+RUN pip install matplotlib
 
-RUN pip3 install plotly
+RUN pip install plotly
 
-RUN pip3 install geopandas 
+RUN pip install geopandas 
 
-RUN pip3 install json
+RUN pip install json
 
-RUN pip3 install geopy
+RUN pip install geopy
 
-RUN pip3 install typing
+RUN pip install typing
 
 COPY ./app .
