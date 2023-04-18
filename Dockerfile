@@ -12,8 +12,6 @@ RUN pip install plotly
 
 RUN pip install geopandas 
 
-RUN pip install json
-
 RUN pip install geopy
 
 RUN pip install typing
