@@ -106,6 +106,8 @@ Una vez teniendo la exploración inicial, se crearon funciones que realizan cons
 
 [Consultas BASTÓ](https://nestor1608-deploy-basto-streamlit-app-xiqp8y.streamlit.app/)
 
+![Streamlit](Imagenes/Streamlit_basto.png)
+
 
 En la página podemos observar:
 
@@ -121,14 +123,38 @@ Y dados esos filtros se muestra un mapa localizando las ubicaciones y los siguie
 * Tiempo de pastoreo
 * Determinar vacas aisladas en un lapso de tiempo 
 
-![Mapa](Imagenes/Mapa_recorrido.png) ![Deploy](Imagenes/Deployment.png)
+![Mapa](Imagenes/Streamlit_basto2.png)
 
+<br/>
+
+## API
+
+<br/>
+
+Las consultas que se disponibilizaron en la API para las necesidades de la empresa fueron:
+
+<br/>
+
+* Primer consulta: Informacion propia de una asentamiento.
+
+* Segunda consulta: Informacion propia de una asentamiento en un periodo de tiempo.
+
+* Tercera consulta: Toda la informacion de una vaca de un establecimiento
+
+* Cuarta consulta: Días con más registros en la semana de una vaca en un establecimiento
+
+* Quinta consulta: Toda la informacion de una vaca, en un establecimiento en una fecha
+
+* Sexta consulta: Toda la informacion de una vaca, en un establecimiento en un periodo de tiempo
 
 
 ## Contacto de Equpo de trabajo 
 
-* Renzo Marcelo Sosa - rensogonsales@gmail.com
-* Franco Jose Ariel Laborde - jose_ariel_franco@hotmail.com
-* Nestor Javier Gentil - nestor_gentil@hotmail.com
-* Brandon Andrei Albornoz Lizarazo - baalbornozl@unal.edu.co
-* Ariatna Hernández Castillo - ariarana902@gmail.com
+| Miembro  | Github | Correo |
+| ------------- | ------------- | ------------- |
+| Renzo Marcelo Sosa  | https://github.com/Renzo96 | rensogonsales@gmail.com  |
+| Franco Jose Ariel Laborde | https://github.com/FrancoJALaborde  | jose_ariel_franco@hotmail.com |
+| Nestor Javier Gentil | https://github.com/nestor1608 | nestor_gentil@hotmail.com |
+| Brandon Andrei Albornoz Lizarazo | https://github.com/AndreiGatoCB | baalbornozl@unal.edu.co |
+| Ariatna Hernández Castillo | https://github.com/Arii95 | ariarana902@gmail.com
+
