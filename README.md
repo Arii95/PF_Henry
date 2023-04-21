@@ -108,6 +108,7 @@ Una vez teniendo la exploración inicial, se crearon funciones que realizan cons
 
 ![Streamlit](Imagenes/Streamlit_basto.png)
 
+<br/>
 
 En la página podemos observar:
 
@@ -147,6 +148,7 @@ Las consultas que se disponibilizaron en la API para las necesidades de la empre
 
 * Sexta consulta: Toda la informacion de una vaca, en un establecimiento en un periodo de tiempo
 
+<br/>
 
 ## Contacto de Equpo de trabajo 
 
