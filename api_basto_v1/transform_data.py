@@ -96,24 +96,26 @@ def acumular_diferencia_tiempo(df, cluster_rum, cluster_rum_2):
     df["pastando"] = 0
     df["durmiendo"] = 0
     df["bebiendo"] = 0
+    cantidadregistro=0
 
     # Recorrer el DataFrame y sumar los valores de la diferencia entre "point_ini" y "point_next" según las condiciones dadas
     for i, row in df.iterrows():
         if row["dormida"] == "SI" and row['agua'] == 0:
             df.at[i, "durmiendo"] += ((row["point_next"] - row["point_ini"]).total_seconds())/3600
-        elif row["cluster"] == cluster_rum and row["dormida"] == "NO" and row['agua'] == 0:
+        elif row["cluster"] == 1 and row["dormida"] == "NO" and row['agua'] == 0:
             df.at[i, "rumeando"] += ((row["point_next"] - row["point_ini"]).total_seconds())/3600
-        elif row["cluster"] == cluster_rum_2 and row['agua'] == 0:
+        elif row["cluster"] == 0 and row['agua'] == 0:
             df.at[i, "pastando"] += ((row["point_next"] - row["point_ini"]).total_seconds())/3600
         elif row['agua'] == 1 :
             df.at[i, "bebiendo"] += ((row["point_next"] - row["point_ini"]).total_seconds())/3600
-
+        cantidadregistro +=1
     # Crear un nuevo DataFrame con los valores totales de cada actividad
     total_df = pd.DataFrame({
-        "rumeando": [cosa(df["rumeando"].sum())],
+        "rumiando": [cosa(df["rumeando"].sum())],
         "pastando": [cosa(df["pastando"].sum())],
         "durmiendo": [cosa(df["durmiendo"].sum())],
-        "bebiendo": [cosa(df["bebiendo"].sum())]
+        "bebiendo": [cosa(df["bebiendo"].sum())],
+        "cant_registro": cantidadregistro
     })
     
     return total_df
@@ -128,3 +130,33 @@ def separador_por_dia(df):
     diarios=pd.concat(diarios.values(),keys=diarios.keys(),axis=0)
     diarios=diarios.reset_index(level=1).drop(columns=['level_1'])
     return diarios 
+
+# DIAGNOSTICO -------------------------------------------------
+
+
+def respuesta_diagnostico(valor,min,max):
+    if valor > min and valor < (max+(max*0.05)):
+        result='normal'
+    elif valor > (min-(min*0.25)) and valor < (max+(max*0.25)):
+        result= 'atencion!' 
+    else:
+        result= 'mal'
+    return result
+
+
+def diagnostico_devices(df):
+    rumia=[float(x.split('h')[0]) for x in df['rumiando']]
+    pastoreo=[float(x.split('h')[0]) for x in df['pastando']]
+    durmiendo=[float(x.split('h')[0]) for x in df['durmiendo']]
+    agua=[float(x.split('h')[0]) for x in df['bebiendo']]
+    can_r=['optimo' if x >= 72 else 'poco' if x < 68 else 'no optimo' for x in df['cant_registro'] ]
+    
+    diag= pd.DataFrame({
+        'fecha':[x for x in df.index],
+        'rumiando':[respuesta_diagnostico(x,6,8) for x in rumia] ,
+        'pastando':[respuesta_diagnostico(x,8,12) for x in pastoreo],
+        'durmiendo':[respuesta_diagnostico(x,5,8) for x in durmiendo],
+        'agua':[respuesta_diagnostico(x,1,4) for x in agua] ,
+        'cant_registro':can_r,
+    })
+    return diag

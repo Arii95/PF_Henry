@@ -43,9 +43,7 @@ def update_aguada(setle):
         x= aguadas[aguadas['animalSettlement']==setle]
         agua =data_devise[data_devise.deviceAnimalID.isin(x._id)]
         return agua
-    
-    
-    
+
 
 def data_devices(data: pd.DataFrame, uuid: str) -> pd.DataFrame:
     """

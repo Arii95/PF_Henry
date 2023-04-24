@@ -6,10 +6,10 @@ import json
 from ml_suport import predict_model,kmeans
 from aguadas import agua_click,result_select,agua_clicks
 import pandas as pd
-from transform_data import add_dormida_column,separador_por_dia, dataframe_interview_vaca,data_interview
+from transform_data import add_dormida_column,separador_por_dia, dataframe_interview_vaca,data_interview,diagnostico_devices
 #Creo una instancia de FastAPI
 app = FastAPI()
-add
+
 #---- redireccion al docs de fastapi--------
 
 @app.get('/')
@@ -58,6 +58,7 @@ async def informacion_por_un_dia_una_vaca_por_finca(nombre : str, id : str, fech
     data_finca = setle_clean(nombre)
     df_gp = filter_area_perimetro(df_gps,data_finca['latitud_c'],data_finca['longitud_c'],data_finca['hectares'])
     df_gp = select_data_by_date(df_gp,fecha)
+    df_gp = data_devices(df_gp,id)
     df_gp = dataframe_interview_vaca(df_gp)
     df_gp.point_ini= df_gp.point_ini.astype(str)
     df_gp.point_next= df_gp.point_next.astype(str)
@@ -92,7 +93,9 @@ async def conducta_vaca(nombre : str, id : str, fecha: str):
     resumen.index= resumen.index.astype(str)
     df_gp.point_ini= df_gp.point_ini.astype(str)
     df_gp.point_next= df_gp.point_next.astype(str)
-    datos={'datos':json.loads(df_gp.to_json()),'resumen_datos':json.loads(resumen.to_json())}
+    diagnostico = diagnostico_devices(resumen)
+    df_gp=df_gp.drop(columns=['fecha'])
+    datos={'datos':json.loads(df_gp.to_json()),'resumen_datos':json.loads(resumen.to_json()),'diagnostico':json.loads(diagnostico.to_json())}
     return JSONResponse(content= datos)
             
 
@@ -110,4 +113,6 @@ async  def conducta_vaca_periodo(nombre : str, id : str, fecha_init: str, fecha_
     df_gp = add_dormida_column(df_gp, 1, 20, 7)
     resultados = separador_por_dia(df_gp)
     resultados.index= resultados.index.astype(str)
-    return JSONResponse(content= json.loads(resultados.to_json()))
+    diagnostico = diagnostico_devices(resultados)
+    data_json={'datos':json.loads(resultados.to_json()),'diagnostico':json.loads(diagnostico.to_json())}
+    return JSONResponse(content= data_json)

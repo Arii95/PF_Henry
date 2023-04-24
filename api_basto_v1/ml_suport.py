@@ -27,7 +27,7 @@ cambio={'pastoreo':0,'rumia':1}
 concatenado.actividad= concatenado.actividad.map(cambio)
 
 
-X = concatenado[['distancia','velocidad','aceleracion']]
+X = concatenado[['velocidad','aceleracion']]#'distancia',
 y= concatenado['actividad']
 
 # crear el modelo de K-means con 2 clusters para (rumia y pastoreo)
@@ -37,7 +37,7 @@ kmeans = KMeans(n_clusters=2,random_state=0).fit(X,y)
 def predict_model(model,data):
     data= data.fillna(0.0)
     data.loc[(data.aceleracion == np.inf) | (data.aceleracion == -np.inf),'aceleracion']=0.0
-    x_test = data[['p_distancia','velocidad','aceleracion']].values
+    x_test = data[['velocidad','aceleracion']].values#'p_distancia',
     perro = model.predict(x_test)
     data['cluster'] = perro
     return data
