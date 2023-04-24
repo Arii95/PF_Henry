@@ -1,4 +1,4 @@
-git import pandas as pd
+import pandas as pd
 from geopy.distance import great_circle
 
 from support_api import filter_area_perimetro,setle_clean,data_devices,df_row
