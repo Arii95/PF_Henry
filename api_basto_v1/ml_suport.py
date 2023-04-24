@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
-
+from sklearn.preprocessing import StandardScaler
 
 # Dataframe para pastoreo
 pastoreo_df = pd.DataFrame({
@@ -25,19 +25,29 @@ concatenado = pd.concat([pastoreo_df, rumia_df], axis=0, ignore_index=True)
 concatenado= concatenado.sample(frac=1,random_state=42).reset_index(drop=True)
 cambio={'pastoreo':0,'rumia':1}
 concatenado.actividad= concatenado.actividad.map(cambio)
+# X = concatenado[['velocidad','aceleracion']]#'distancia',
+# y= concatenado['actividad']
 
+scaler= StandardScaler()
+data_sca= scaler.fit_transform(concatenado[['velocidad',  'aceleracion']])
+y=concatenado['actividad']
+kmeans= KMeans(n_clusters=2 , random_state=42)
+kmeans.fit(data_sca,y)
 
-X = concatenado[['velocidad','aceleracion']]#'distancia',
-y= concatenado['actividad']
-
-# crear el modelo de K-means con 2 clusters para (rumia y pastoreo)
-kmeans = KMeans(n_clusters=2,random_state=0).fit(X,y)
+# # crear el modelo de K-means con 2 clusters para (rumia y pastoreo)
+# kmeans = KMeans(n_clusters=2,random_state=0).fit(X,y)
 
 # funcion que utiliza el modelo entrenado.. "identifica el comprtamiento" y indica el comportamiento con un 1 o 0
 def predict_model(model,data):
-    data= data.fillna(0.0)
     data.loc[(data.aceleracion == np.inf) | (data.aceleracion == -np.inf),'aceleracion']=0.0
     x_test = data[['velocidad','aceleracion']].values#'p_distancia',
     perro = model.predict(x_test)
     data['cluster'] = perro
+    return data
+
+def fit_model(data,concatenado):
+    dat= data.fillna(0.0)
+    X=concatenado[['velocidad','aceleracion']]
+    kmeans= KMeans(n_clusters=2,random_state=0).fit(X)
+    data = predict_model(kmeans,dat)
     return data

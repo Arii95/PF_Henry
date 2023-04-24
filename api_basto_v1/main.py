@@ -3,7 +3,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from starlette.responses import RedirectResponse
 import json
-from ml_suport import predict_model,kmeans
+from ml_suport import predict_model,concatenado, fit_model
 from aguadas import agua_click,result_select,agua_clicks
 import pandas as pd
 from transform_data import add_dormida_column,separador_por_dia, dataframe_interview_vaca,data_interview,diagnostico_devices
@@ -50,7 +50,7 @@ async def filtro_por_una_vaca_establecimiento(nombre : str, id : str):
     df_gps.point_next= df_gps.point_next.astype(str)
     return JSONResponse(content= json.loads(df_gps.to_json()))
 
-
+   
 
 # Cuarta consulta: Toda la informacion de una vaca, en un establecimiento en una fecha
 @app.get("/informacion_por_un_dia_una_vaca_por_finca/{nombre}/{id}/{fecha}")
@@ -85,7 +85,7 @@ async def conducta_vaca(nombre : str, id : str, fecha: str):
     df_gp= data_devices(finca,id)
     df_gp = select_data_by_date(df_gp,fecha)
     df_gp = dataframe_interview_vaca(df_gp)
-    df_gp = predict_model(kmeans,df_gp)
+    df_gp = fit_model(df_gp,concatenado)
     d = agua_click(finca, id ,fecha ,str(data_finca._id.values[0]))
     df_gp =result_select(df_gp,d)
     df_gp = add_dormida_column(df_gp, 1, 20, 6)
@@ -107,7 +107,7 @@ async  def conducta_vaca_periodo(nombre : str, id : str, fecha_init: str, fecha_
     df_gp= data_devices(finca,id)
     df_gp = select_data_by_dates(df_gp,fecha_init,fecha_fin)
     df_gp = dataframe_interview_vaca(df_gp)
-    df_gp = predict_model(kmeans,df_gp)
+    df_gp = dataframe_interview_vaca(df_gp)
     d= agua_clicks(finca,id,fecha_init,fecha_fin,str(data_finca._id.values[0]))
     df_gp =result_select(df_gp,d)
     df_gp = add_dormida_column(df_gp, 1, 20, 7)

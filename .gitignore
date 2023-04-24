@@ -5,4 +5,5 @@ data_clean_gps.csv
 data_origin_gps.csv
 settle.csv
 api_basto/__pycache__
-
+devices_punto_fijo.csv
+puntosfijos_aguadas.csv
