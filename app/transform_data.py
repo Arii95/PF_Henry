@@ -9,7 +9,6 @@ def dataframe_interview_vaca(data: pd.DataFrame) -> pd.DataFrame:
     Función que procesa un DataFrame de datos de GPS para calcular la distancia recorrida, la velocidad promedio y el tiempo
     de recorrido entre cada par de puntos consecutivos. Además, agrega una columna con la relación de velocidad entre puntos 
     consecutivos.
-
     Parametros:
     -----------
     - DataFrame de datos de GPS con columnas 'createdAt', 'dataRowData_lat', 'dataRowData_lng' y 'dataRowData_gpsVel'
@@ -18,24 +17,32 @@ def dataframe_interview_vaca(data: pd.DataFrame) -> pd.DataFrame:
     -----------
     - DataFrame con las columnas 'point_ini', 'point_next', 'interval_time', 'distancia', 'velocidad', 'tiempo' y 'charge_vel'
     """
-    data = data.reset_index(drop=True)
-    data_shifted = data.shift(1)
-    data_shifted.columns = [f'{col}_next' for col in data_shifted.columns]
-    merged_data = pd.concat([data, data_shifted], axis=1)
-
-    merged_data = merged_data.iloc[1:-1]
-    merged_data['distancia'] = merged_data.apply(lambda row: great_circle((row['dataRowData_lat'], row['dataRowData_lng']), (row['dataRowData_lat_next'], row['dataRowData_lng_next'])).kilometers, axis=1)
-    merged_data['interval_time'] = (merged_data['createdAt_next'] - merged_data['createdAt']).astype('timedelta64[h]')
-
-    merged_data['velocidad'] = round(merged_data['dataRowData_gpsVel'], 3)
-    merged_data.loc[merged_data['velocidad'].isna(), 'velocidad'] = round(merged_data['distancia'] / merged_data['interval_time'] / pd.Series(merged_data['velocidad'].dropna()).mean(), 3)
-
-    merged_data['tiempo'] = round(merged_data['distancia'] / merged_data['velocidad'], 3)
-
-    df = merged_data[['createdAt', 'createdAt_next', 'interval_time', 'distancia', 'velocidad', 'tiempo']]
-    df.columns = ['point_ini', 'point_next', 'interval_time', 'distancia', 'velocidad', 'tiempo']
-    df['aceleracion'] = df['velocidad'].diff() / df['tiempo'].diff()
-    df['p_distancia'] = df['velocidad'] * df['tiempo']
+    data_dis=[]
+    data_vel=[]
+    data_time=[]
+    data_inter= []
+    data_in=[]
+    data_fin=[]
+    for i in range(0,data.shape[0]+1):
+        try:
+            dista_km= great_circle(tuple(data.iloc[i][['dataRowData_lat','dataRowData_lng']].values),tuple(data.iloc[i+1][['dataRowData_lat','dataRowData_lng']].values)).kilometers
+            data_in.append(data.iloc[i][['createdAt']].values[0])
+            data_fin.append(data.iloc[i+1][['createdAt']].values[0])
+            interval= int(data.iloc[i+1][['createdAt']].values[0].strftime('%H')) - int(data.iloc[i][['createdAt']].values[0].strftime('%H'))
+            data_inter.append(interval)
+            if dista_km <= 8.:
+                data_dis.append(round(dista_km,3))
+            if data.iloc[i].dataRowData_gpsVel:
+                data_vel.append(round(data.iloc[i].dataRowData_gpsVel,3))
+                data_time.append(round(dista_km/data.iloc[i].dataRowData_gpsVel,3))
+            else:
+                data_time.append(round(dista_km/pd.Series(data_vel).mean().round(3),3))# les puede dar error si el array de velocidad esta vacio... toma el valor promedio de las velocidades que hay hasta el momento
+        except IndexError:
+            pass
+    df = list(zip(data_in,data_fin,data_inter,data_dis,data_vel,data_time))
+    df = pd.DataFrame(df,columns=['point_ini','point_next' ,'interval_time','distancia','velocidad','tiempo']) 
+    df['aceleracion']= df['velocidad'].diff()/df['tiempo'].diff()
+    df['p_distancia']= df['velocidad'] * df['tiempo'] 
     return df
 
 
