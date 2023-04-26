@@ -1,4 +1,4 @@
-from support_api import filter_area_perimetro, data_devices, select_data_by_date,setle_clean,df_gps,select_data_by_dates
+from support_api import filter_area_perimetro, data_devices, select_data_by_date,setle_clean,df_gps,select_data_by_dates, agregar_ith
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from starlette.responses import RedirectResponse
@@ -90,6 +90,7 @@ async def conducta_vaca(nombre : str, id : str, fecha: str):
     df_gp= data_devices(finca,id)
     df_gp = select_data_by_date(df_gp,fecha)
     df_gp = dataframe_interview_vaca(df_gp)
+    df_gp = agregar_ith(df_gp,fecha,str(data_finca._id.values[0]))
     df_gp = predict_model(df_gp)
     d = agua_click(finca, id ,fecha ,str(data_finca._id.values[0]))
     df_gp =result_select(df_gp,d)
@@ -112,6 +113,7 @@ async  def conducta_vaca_periodo(nombre : str, id : str, fecha_init: str, fecha_
     df_gp = data_devices(finca,id)
     df_gp = select_data_by_dates(df_gp,fecha_init,fecha_fin)
     df_gp = dataframe_interview_vaca(df_gp)
+    df_gp = agregar_ith(df_gp,fecha_init,str(data_finca._id.values[0]),fecha_fin)
     df_gp = predict_model(df_gp)
     d = agua_clicks(finca,id,fecha_init,fecha_fin,str(data_finca._id.values[0]))
     df_gp = result_select(df_gp,d)
