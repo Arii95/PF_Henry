@@ -112,6 +112,8 @@ async  def conducta_vaca_periodo(nombre : str, id : str, fecha_init: str, fecha_
     resultados.index= resultados.index.astype(str)
     return JSONResponse(content= json.loads(resultados.to_json()))
 
+
+#Octava consulta
 @app.get("/dias_top_registro/{nombre}/{id}")
 async def obtener_lista_top4_vacas(nombre: str, id: str):
     data_finca = setle_clean(nombre)
