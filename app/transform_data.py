@@ -119,3 +119,31 @@ def separador_por_dia(df):
     diarios=pd.concat(diarios.values(),keys=diarios.keys(),axis=0)
     diarios=diarios.reset_index(level=1).drop(columns=['level_1'])
     return diarios 
+
+
+def respuesta_diagnostico(valor,min,max):
+    if valor > min and valor < (max+(max*0.05)):
+        result='normal'
+    elif valor > (min-(min*0.25)) and valor < (max+(max*0.25)):
+        result= 'atencion!' 
+    else:
+        result= 'mal'
+    return result
+
+
+def diagnostico_devices(df):
+    rumia=[float(x.split('h')[0]) for x in df['rumiando']]
+    pastoreo=[float(x.split('h')[0]) for x in df['pastando']]
+    durmiendo=[float(x.split('h')[0]) for x in df['durmiendo']]
+    agua=[float(x.split('h')[0]) for x in df['bebiendo']]
+    can_r=['optimo' if x >= 72 else 'poco' if x < 68 else 'no optimo' for x in df['cant_registro'] ]
+    
+    diag= pd.DataFrame({
+        'fecha':[x for x in df.index],
+        'rumiando':[respuesta_diagnostico(x,6,8) for x in rumia] ,
+        'pastando':[respuesta_diagnostico(x,8,12) for x in pastoreo],
+        'durmiendo':[respuesta_diagnostico(x,5,8) for x in durmiendo],
+        'agua':[respuesta_diagnostico(x,1,4) for x in agua] ,
+        'cant_registro':can_r,
+    })
+    return diag

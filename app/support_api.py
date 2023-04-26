@@ -43,9 +43,7 @@ def update_aguada(setle):
         x= aguadas[aguadas['animalSettlement']==setle]
         agua =data_devise[data_devise.deviceAnimalID.isin(x._id)]
         return agua
-    
-    
-    
+
 
 def data_devices(data: pd.DataFrame, uuid: str) -> pd.DataFrame:
     """
@@ -166,6 +164,36 @@ def setle_clean(select):
     setle_n = df_setle[['_id','hectares','registerNumber','headsCount','name','latitud_c','longitud_c']]
     return setle_n
 
+
+# def agregar_ith(data, fecha,asentamiento_id):
+#     df_setith= mongo_data('settlementithcounts')
+#     df_setith.settlementId =df_setith.settlementId.astype(str)
+#     pru= df_setith[df_setith.settlementId ==asentamiento_id]
+#     prueba=pru[pru.createdAt.dt.date ==pd.to_datetime(fecha)]
+#     if prueba.shape[0]!=0:
+#         prueba_ith= pd.merge(data,prueba[['createdAt', 'ITH']],left_on=data.point_ini.dt.hour, right_on=prueba['createdAt'].dt.hour)
+#         prueba_ith= prueba_ith.drop(columns=['key_0','createdAt'])
+#         return prueba_ith
+#     else:
+#         return f'fecha vacia'
+
+
+def agregar_ith(data, fecha_ini,asentamiento_id,fecha_fin=None):
+    df_setith= mongo_data('settlementithcounts')
+    df_setith.settlementId =df_setith.settlementId.astype(str)
+    pru= df_setith[df_setith.settlementId ==asentamiento_id]
+    if fecha_fin== None:
+        prueba=pru[pru.createdAt.dt.date ==pd.to_datetime(fecha_ini)]
+        if prueba.shape[0]!=0:
+            prueba_ith= pd.merge(data,prueba[['createdAt', 'ITH']],left_on=data.point_ini.dt.hour, right_on=prueba['createdAt'].dt.hour)
+            prueba_ith= prueba_ith.drop(columns=['key_0','createdAt'])
+            return prueba_ith
+    else:
+        prueba=pru[(pru.createdAt.dt.date >= pd.to_datetime(fecha_ini)) & (pru.createdAt.dt.date <= pd.to_datetime(fecha_fin))]
+        if prueba.shape[0]!=0:
+            prueba_ith= pd.merge(data,prueba[['createdAt', 'ITH']],left_on=data.point_ini.dt.hour, right_on=prueba['createdAt'].dt.hour)
+            prueba_ith= prueba_ith.drop(columns=['key_0','createdAt'])
+            return prueba_ith
 
 
 
