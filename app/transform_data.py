@@ -87,24 +87,26 @@ def acumular_diferencia_tiempo(df, cluster_rum, cluster_rum_2):
     df["pastando"] = 0
     df["durmiendo"] = 0
     df["bebiendo"] = 0
+    cantidadregistro=0
 
     # Recorrer el DataFrame y sumar los valores de la diferencia entre "point_ini" y "point_next" según las condiciones dadas
     for i, row in df.iterrows():
         if row["dormida"] == "SI" and row['agua'] == 0:
             df.at[i, "durmiendo"] += ((row["point_next"] - row["point_ini"]).total_seconds())/3600
-        elif row["cluster"] == cluster_rum and row["dormida"] == "NO" and row['agua'] == 0:
+        elif row["cluster"] == 1 and row["dormida"] == "NO" and row['agua'] == 0:
             df.at[i, "rumeando"] += ((row["point_next"] - row["point_ini"]).total_seconds())/3600
-        elif row["cluster"] == cluster_rum_2 and row['agua'] == 0:
+        elif row["cluster"] == 0 and row['agua'] == 0:
             df.at[i, "pastando"] += ((row["point_next"] - row["point_ini"]).total_seconds())/3600
         elif row['agua'] == 1 :
             df.at[i, "bebiendo"] += ((row["point_next"] - row["point_ini"]).total_seconds())/3600
-
+        cantidadregistro +=1
     # Crear un nuevo DataFrame con los valores totales de cada actividad
     total_df = pd.DataFrame({
-        "rumeando": [cosa(df["rumeando"].sum())],
+        "rumiando": [cosa(df["rumeando"].sum())],
         "pastando": [cosa(df["pastando"].sum())],
         "durmiendo": [cosa(df["durmiendo"].sum())],
-        "bebiendo": [cosa(df["bebiendo"].sum())]
+        "bebiendo": [cosa(df["bebiendo"].sum())],
+        "cant_registro": cantidadregistro
     })
     
     return total_df
@@ -119,6 +121,8 @@ def separador_por_dia(df):
     diarios=pd.concat(diarios.values(),keys=diarios.keys(),axis=0)
     diarios=diarios.reset_index(level=1).drop(columns=['level_1'])
     return diarios 
+
+# DIAGNOSTICO -------------------------------------------------
 
 
 def respuesta_diagnostico(valor,min,max):
