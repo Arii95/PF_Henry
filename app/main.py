@@ -25,7 +25,8 @@ async def informacion_por_finca(nombre: str):
     merge_data = data_interview(nombre)
     merge_data.point_ini= merge_data.point_ini.astype(str)
     merge_data.point_next= merge_data.point_next.astype(str)
-    return JSONResponse(content= json.dumps(merge_data.to_dict('records')))
+    #return JSONResponse(content= json.dumps(merge_data.to_dict('records')))
+    return JSONResponse(content= json.loads(merge_data.to_json()))
 
 
 # Segunda consulta: Informacion propia de una finca en un periodo de tienpo.
@@ -37,7 +38,8 @@ async def informacion_por_un_periodo_por_finca(nombre : str, fecha_init: str, fe
     df_gp = data_interview(nombre,df_gp)
     df_gp.point_ini= df_gp.point_ini.astype(str)
     df_gp.point_next= df_gp.point_next.astype(str)
-    return JSONResponse(content= json.dumps(df_gp.to_dict('records')))
+    #return JSONResponse(content= json.dumps(df_gp.to_dict('records')))
+    return JSONResponse(content= json.loads(df_gp.to_json()))
 
 
 
@@ -48,7 +50,8 @@ async def filtro_por_una_vaca_establecimiento(nombre : str, id : str):
     df_gps = data_finca[data_finca.UUID==id]
     df_gps.point_ini= df_gps.point_ini.astype(str)
     df_gps.point_next= df_gps.point_next.astype(str)
-    return JSONResponse(content= json.dumps( df_gps.to_dict('records')))
+    #return JSONResponse(content= json.dumps( df_gps.to_dict('records')))
+    return JSONResponse(content= json.loads(df_gps.to_json()))
 
 
 
@@ -62,7 +65,8 @@ async def informacion_por_un_dia_una_vaca_por_finca(nombre : str, id : str, fech
     df_gp = dataframe_interview_vaca(df_gp)
     df_gp.point_ini= df_gp.point_ini.astype(str)
     df_gp.point_next= df_gp.point_next.astype(str)
-    return JSONResponse(content=  json.dumps(df_gp.to_dict('records')))
+    #return JSONResponse(content=  json.dumps(df_gp.to_dict('records')))
+    return JSONResponse(content= json.loads(df_gp.to_json()))
 
 
 # Quinta consulta: Toda la informacion de una vaca, en un establecimiento en un periodo de tiempo
@@ -75,7 +79,8 @@ async def informacion_por_un_periodo_una_vaca_por_finca(nombre : str, id : str, 
     df_gp = dataframe_interview_vaca(df_gp)
     df_gp.point_ini= df_gp.point_ini.astype(str)
     df_gp.point_next= df_gp.point_next.astype(str)
-    return JSONResponse(content= json.dumps(df_gp.to_dict('records')))
+    #return JSONResponse(content= json.dumps(df_gp.to_dict('records')))
+    return JSONResponse(content= json.loads(df_gp.to_json()))
 
 # Sexta consulta:
 @app.get("/conducta_vaca/{nombre}/{id}/{fecha}")
