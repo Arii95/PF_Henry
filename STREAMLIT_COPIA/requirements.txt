@@ -1,0 +1,9 @@
+pandas
+geopy
+geopandas
+plotly
+seaborn
+shapely
+datetime
+scikit-learn
+pymongo
