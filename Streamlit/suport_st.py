@@ -4,7 +4,7 @@ from funciones_app import data_devices, gps_data
 import random
 
 def lista_colores_ux_ui():
-    colores = ["#007bff", "#28a745", "#dc3545", "#ffc107", "#17a2b8", "#6c757d", "#343a40","#343a40", "#007bff", "#28a745", "#dc3545", "#ffc107", "#17a2b8", "#6c757d", "#343a40", "#f8f9fa", "#007bff", "#dc3545", "#ffc107", "#17a2b8", "#6c757d", "#343a40", "#f8f9fa", "#343a40", "#28a745", "#dc3545", "#ffc107", "#17a2b8", "#6c757d", "#343a40", "#f8f9fa", "#343a40"]
+    colores = ["#28a745", "#dc3545", "#ffc107", "#17a2b8", "#6c757d", "#007bff", "#28a745", "#dc3545", "#ffc107", "#17a2b8", "#6c757d", "#343a40", "#007bff", "#dc3545", "#ffc107", "#17a2b8", "#343a40", "#f8f9fa", "#343a40", "#28a745", "#dc3545", "#ffc107", "#17a2b8", "#6c757d", "#343a40", "#f8f9fa", "#343a40"]
     return colores
 
 def random_color():
@@ -67,7 +67,8 @@ def grafic_map(data, list_vacas, lat_orig, lng_orig, fig):
             style='satellite', # Estilo de mapa satelital
             accesstoken=mapbox_access_token,
             zoom=14, # Nivel de zoom inicial del mapa
-            center=dict(lat=lat_orig,lon=lng_orig),
+            #center=dict(lat=lat_orig,lon=lng_orig),
+            center=dict(lat=dta.iloc[-1]['dataRowData_lat'],lon=dta.iloc[-1]['dataRowData_lng'])
         ),
         showlegend=False
     )

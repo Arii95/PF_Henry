@@ -1,9 +1,10 @@
 import datetime
 import pandas as pd
 import pymongo
+import numpy as np
 
-data_mongo = pymongo.MongoClient('mongodb+srv://brandon:brandon1@cluster0.tfvievv.mongodb.net/?retryWrites=true&w=majority')
-
+data_mongo = pymongo.MongoClient('localhost:27017') #'mongodb+srv://brandon:brandon1@cluster0.tfvievv.mongodb.net/?retryWrites=true&w=majority')
+# )#
 # Seleccionar una base de datos existente o crear una nueva llamada 'test'.
 db = data_mongo['test']
 

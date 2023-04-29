@@ -209,3 +209,11 @@ def dataframe_interview_vaca(data): # tratar de filtrar por perimetro porque si 
     df['aceleracion']= df['velocidad'].diff()/df['tiempo'].diff()
     df['p_distancia']= df['velocidad'] * df['tiempo'] 
     return df
+
+def transform(x):
+    horas =int(x.replace(',','').split('h')[0])
+    minutos=int(x.replace(',','').strip().split('h')[1].split('min')[0])
+    if minutos > 50:
+        horas +=1
+    return horas
+

@@ -140,13 +140,17 @@ Las consultas que se disponibilizaron en la API para las necesidades de la empre
 
 * Segunda consulta: Informacion propia de una asentamiento en un periodo de tiempo.
 
-* Tercera consulta: Toda la informacion de una vaca de un establecimiento
+* Tercera consulta: Toda la informacion de una vaca de un establecimiento.
 
-* Cuarta consulta: Días con más registros en la semana de una vaca en un establecimiento
+* Cuarta consulta: Toda la informacion de una vaca, en un establecimiento en una fecha.
 
-* Quinta consulta: Toda la informacion de una vaca, en un establecimiento en una fecha
+* Quinta consulta: Toda la informacion de una vaca, en un establecimiento en un rango de fecha.
 
-* Sexta consulta: Toda la informacion de una vaca, en un establecimiento en un periodo de tiempo
+* Sexta consulta: La conducta de una vaca un día. 
+
+* Séptima: La conducta de la vaca en un periodo de tiempo. 
+
+* Octava consulta: Días con más registros de una vaca en un establecimiento. 
 
 <br/>
 
