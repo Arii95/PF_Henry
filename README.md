@@ -1,6 +1,14 @@
-![header](Imagenes/Header_bastó.jpeg)
+![henry](Imagenes/Henry.png)  ![BASTO](Imagenes/BASTO_ICON.jpg)
 
-#  Proyecto BASTÓ
+<br/>
+
+# PROYECTO GRUPAL - BASTÓ Ganado inteligente #
+
+<br/>
+
+![header](Imagenes/header.jpg)
+
+#  Start-Up BASTÓ
 
 __BASTÓ__ es un StartUp que apuesta por la transformación de la ganadería. Han desarrollado una cerca virtual dinámica que, a través de un collar inteligente, emite estímulos inocuos, cuidando el bienestar animal, contiene y arrea al ganado de un corral a otro gestionando un pastoreo eficiente, sustentable y de precisión. 
 
@@ -20,7 +28,9 @@ __Plataforma BLE__ → Comportamiento animal.
 
 <br/>
 
-## Henry Project
+# __Henry Project__ 
+
+<br/>
 
 *Objetivo:*
 
@@ -76,63 +86,46 @@ Aproximadamente las vacas toman en promedio unos 20 litros diarios, en unas 4 ve
 
 <br/>
 
-En un estudio (Cabezas, 2022) se observó que las conductas que más se observaban en un ganado eran: Pastoreo, Rumiación, Descanso en el pasto y estar paradas sin hacer algo relevante. Por lo tanto el tiempo que pasan en cada situación puede ayudarnos a predecir patrones en los que se mueve el ganado asociado a la localización de GPS que nos proporcionan los collares. 
+En un estudio se observó que las conductas que más se observaban en un ganado eran: Pastoreo, Rumiación, Descanso en el pasto y estar paradas sin hacer algo relevante. Por lo tanto el tiempo que pasan en cada situación puede ayudarnos a predecir patrones en los que se mueve el ganado asociado a la localización de GPS que nos proporcionan los collares. 
 
 <br/>
 
 ## Visualización de datos 
+
+<br/>
 
 Los datos GPS proveído por los collares es almacenado en una base de datos no relacional llamada MongoDB en la cual se van guardando documentos con información sobre las vacas, las caravanas con su señal en decibeles (RSSI), indicador ITH (Indicador de Temperatura Humedad), los asentamientos con sus límites establecidos, los dispositivos que se encuentran en funcionamiento para poder obtener más datos sobre el desplazamiento del ganado. 
 
 
 <br/>
 
-Para manipular y visualizar los datos de manera más efectiva, se realizó una conexión con Python. Una vez que se tuvo la conexión se realizó una limpieza de los datos extrayendo la información relacionada a la localización de los collares en un potrero, quitando valores nulos o faltantes. La siguiente imagen muestra la localización de los puntos de GPS de 4 collares durante un día
+Para manipular y visualizar los datos de manera más efectiva, se realizó una conexión con Python. Una vez que se tuvo la conexión se realizó una limpieza de los datos extrayendo la información relacionada a la localización de los collares en un potrero, quitando valores nulos o faltantes. La siguiente imagen muestra la localización de los puntos de GPS de 1 collar durante un día.
 
 <br/>
 
-![GPS](Imagenes/GPS_potr.png)
-
-
-Sin embargo la cantidad de registro por dispositivo no era constante a lo largo del periodo de tiempo que se manejaba en la base de datos con la que se estaba trabajando, por lo que se optó por visualizar a manera de gráfico de barras la cantidad de registros por semanas en el periodo proporcionado por lo que podría ser una guía sobre qué datos localizar para tener una mejor aproximación a las inferencias de los patrones que en conjunto las vacas realizan. Las semanas 13 y 14 son las que tienen la mayor cantidad de registros dentro de las vacas posicionadas en el potrero seleccionado anteriormente. 
+![GPS](Imagenes/basto_vaca.png) 
 
 <br/>
 
-## Funciones y consultas en Deployment: Streamlit 
+Sin embargo la cantidad de registro por dispositivo no era constante a lo largo del periodo de tiempo que se manejaba en la base de datos con la que se estaba trabajando, por lo que se optó por filtrar y visualizar a manera de gráfico de barras la cantidad de registros por semanas en el periodo proporcionado por lo que podría ser una guía sobre qué datos localizar para tener una mejor aproximación a las inferencias de los patrones que en conjunto las vacas realizan. 
+
+Las semanas 13 y 14 son las que tienen la mayor cantidad de registros dentro de las vacas posicionadas en el potrero seleccionado anteriormente. En la siguiente imagen podemos ver en la primera gráfica de barras las semanas en las que un collar tiene registros y dentro de esa semana, en el segundo gráfico podemos visualizar en barras la distribución de registros a lo largo de los días dentro de la semana seleccionada en el filtro previo. 
+
+Es importante aclarar que la cantidad de datos a lo largo del año varía dependiendo del collar, el asentamiento y las fechas marcadas. Hubo días con una buena cantidad de registros y gracias a esta cantidad robusta de información se podían realizar mejores predicciones como más adelante se aclarará. 
 
 <br/>
 
-Una vez teniendo la exploración inicial, se crearon funciones que realizan consultas a la base de datos extraida de MongoDB para conocer diferentes características del comportamiento del ganado durante el día, extraido del promedio de las semanas más relevantes. Se pueden consultar estos datos a través de la siguiente URL 
-
-[Consultas BASTÓ](https://nestor1608-deploy-basto-streamlit-app-xiqp8y.streamlit.app/)
-
-![Streamlit](Imagenes/Streamlit_basto.png)
+![semanas](Imagenes/Semanas.png) ![dias](Imagenes/dias.png)
 
 <br/>
 
-En la página podemos observar:
-
-* Los filtros por asentamientos, por collar por medio de sus identificadores directos en la base de datos.
-* Selección de la semana en la que se tienen registro. 
-* Selección del momento del día.
-
-Y dados esos filtros se muestra un mapa localizando las ubicaciones y los siguientes datos: 
-
-* Distancia recorrida a lo largo del día
-* Mapa de la distancia recorrida 
-* Velocidad de movimiento en el pastoreo
-* Tiempo de pastoreo
-* Determinar vacas aisladas en un lapso de tiempo 
-
-![Mapa](Imagenes/Streamlit_basto2.png)
+## Funciones y consultas en Deployment: API & Streamlit 
 
 <br/>
 
-## API
+Una vez teniendo la exploración inicial, se crearon funciones que realizan consultas a la base de datos extraida de MongoDB para conocer diferentes características del comportamiento del ganado durante el día y observar datos filtrados dependiendo del asentamiento, collar y en un tiempo en específico.
 
-<br/>
-
-Las consultas que se disponibilizaron en la API para las necesidades de la empresa fueron:
+A partir de esas funciones se construyó una API, una interfaz de programación, que provee al usuario la comodidad de realizar consultas a la base de datos. Las consultas arrojan datos en json que se disponibilizaron para acotar las necesidades de la empresa fueron:
 
 <br/>
 
@@ -152,15 +145,84 @@ Las consultas que se disponibilizaron en la API para las necesidades de la empre
 
 * Octava consulta: Días con más registros de una vaca en un establecimiento. 
 
+
 <br/>
 
-## Contacto de Equpo de trabajo 
+![API](Imagenes/API.png)
 
-| Miembro  | Github | Correo |
-| ------------- | ------------- | ------------- |
-| Renzo Marcelo Sosa  | https://github.com/Renzo96 | rensogonsales@gmail.com  |
-| Franco Jose Ariel Laborde | https://github.com/FrancoJALaborde  | jose_ariel_franco@hotmail.com |
-| Nestor Javier Gentil | https://github.com/nestor1608 | nestor_gentil@hotmail.com |
-| Brandon Andrei Albornoz Lizarazo | https://github.com/AndreiGatoCB | baalbornozl@unal.edu.co |
-| Ariatna Hernández Castillo | https://github.com/Arii95 | ariarana902@gmail.com
+<br/>
+
+En el siguiente link se puede observar el deploy de la visualización de las funciones elaboradas para la API con Streamlit:
+
+<br/>
+
+[Consultas BASTÓ](https://nestor1608-deploy-basto-streamlit-app-xiqp8y.streamlit.app/)
+
+<br/>
+
+![Streamlit](Imagenes/Streamlit_inicio.png)
+
+<br/>
+
+En la página podemos observar:
+
+* Los filtros por asentamientos, por collar por medio de sus identificadores directos en la base de datos.
+* Selección de la semana en la que se tienen registro. 
+* Selección del momento del día.
+
+Y dados esos filtros se muestra un mapa localizando las ubicaciones y los siguientes datos: 
+
+* Distancia recorrida a lo largo del día
+* Mapa de la distancia recorrida 
+* Velocidad de movimiento en el pastoreo
+* Tiempo de pastoreo
+
+<br/>
+
+![Mapa](Imagenes/Datos_dia.png)
+
+<br/>
+
+## Conducta de la vaca 
+
+<br/>
+
+Con la información filtrada, se construyó un modelo de K-means para agrupar datos para determinar las actividades de la vaca con collar GPS tomando en cuenta el análisis punto a punto mostrado en el Dataframe previo, los datos de:
+
+* Distancia recorrida
+* Velocidad
+* Aceleración 
+
+
+<br/>
+
+![Actividades](Imagenes/Actividades.png)
+
+<br/>
+
+Además de determinar el tiempo que la vaca estaba en un rango cercano a la localización de la aguada. Se realizó un conteo de las veces que se iba a las aguadas con las horas del día en las que estaba cerca para poder encontrar relaciones entre los picos de actividad y la ida a las aguadas. 
+
+<br/> 
+
+![Aguada](Imagenes/aguadas.png)
+
+<br/>
+
+Para concluir, incluimos una tabla al final de diagnóstico en la que se menciona la cantidad de registros obtenidos en la semana seleccionada y, dependiendo de los parámetros esperados conocida por la literatura, la clasificación del tiempo acumulado en cada una de las actividades, para que se señalara si estan dentro de la norma, si tienen una ligera tendencia fuera de la norma o si queda totalmente fuera de los parámetros. 
+
+<br/>
+
+![Diagnostico](Imagenes/diagnostico.png)
+
+<br/>
+
+## Contacto de Equipo de trabajo 
+
+| Miembro  | Github | Correo | Linkedin |
+| ------------- | ------------- | ------------- | ------------- |
+| Renzo Marcelo Sosa  | https://github.com/Renzo96 | rensogonsales@gmail.com  | https://www.linkedin.com/in/renzo-sosa-marcelo-87506a14a/ |
+| Franco Jose Ariel Laborde | https://github.com/FrancoJALaborde  | jose_ariel_franco@hotmail.com | https://www.linkedin.com/in/franco-jose-ariel-laborde-61a7a6206/ |
+| Nestor Javier Gentil | https://github.com/nestor1608 | nestor_gentil@hotmail.com | https://www.linkedin.com/in/nestor-gentil/ |
+| Brandon Andrei Albornoz Lizarazo | https://github.com/AndreiGatoCB | baalbornozl@unal.edu.co | https://www.linkedin.com/in/brandon-andrei-albornoz-lizarazo/ |
+| Ariatna Hernández Castillo | https://github.com/Arii95 | ariarana902@gmail.com |https://www.linkedin.com/in/ariatna-hernandez-/ |
 
