@@ -218,11 +218,11 @@ Para concluir, incluimos una tabla al final de diagnóstico en la que se mencion
 
 ## Contacto de Equipo de trabajo 
 
-| Miembro  | Github | Correo | Linkedin |
-| ------------- | ------------- | ------------- | ------------- |
-| Renzo Marcelo Sosa  | https://github.com/Renzo96 | rensogonsales@gmail.com  | https://www.linkedin.com/in/renzo-sosa-marcelo-87506a14a/ |
-| Franco Jose Ariel Laborde | https://github.com/FrancoJALaborde  | jose_ariel_franco@hotmail.com | https://www.linkedin.com/in/franco-jose-ariel-laborde-61a7a6206/ |
-| Nestor Javier Gentil | https://github.com/nestor1608 | nestor_gentil@hotmail.com | https://www.linkedin.com/in/nestor-gentil/ |
-| Brandon Andrei Albornoz Lizarazo | https://github.com/AndreiGatoCB | baalbornozl@unal.edu.co | https://www.linkedin.com/in/brandon-andrei-albornoz-lizarazo/ |
-| Ariatna Hernández Castillo | https://github.com/Arii95 | ariarana902@gmail.com |https://www.linkedin.com/in/ariatna-hernandez-/ |
+| Miembro  | Github | Linkedin |
+| ------------- | ------------- | ------------- |
+| Renzo Marcelo Sosa  | https://github.com/Renzo96 | https://www.linkedin.com/in/renzo-sosa-marcelo-87506a14a/ |
+| Franco Jose Ariel Laborde | https://github.com/FrancoJALaborde | https://www.linkedin.com/in/franco-jose-ariel-laborde-61a7a6206/ |
+| Nestor Javier Gentil | https://github.com/nestor1608 | https://www.linkedin.com/in/nestor-gentil/ |
+| Brandon Andrei Albornoz Lizarazo | https://github.com/AndreiGatoCB | https://www.linkedin.com/in/brandon-andrei-albornoz-lizarazo/ |
+| Ariatna Hernández Castillo | https://github.com/Arii95 | https://www.linkedin.com/in/ariatna-hernandez-/ |
 
