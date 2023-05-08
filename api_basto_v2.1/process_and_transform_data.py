@@ -114,8 +114,18 @@ def data_interview(nombre: str, data: Optional[pd.DataFrame] = df_gps) -> pd.Dat
 
 
 def agregar_iths(data: pd.DataFrame, asentamiento_name: str) -> pd.DataFrame:
-    
-#0004A30B00F89C52
+    """
+    Agrega el número de ITH (Índice de Tiempo de Espera) a un conjunto de datos que contiene información de tráfico.
+
+    Parámetros:
+    -----------
+    data (pd.DataFrame): Un objeto de tipo DataFrame de Pandas con los datos de tráfico.
+    asentamiento_id (str): El ID del asentamiento al que pertenecen los datos de tráfico.
+
+    Retorna:
+    -----------
+    prueb (pd.DataFrame): Un objeto de tipo DataFrame de Pandas con los datos de tráfico y el número de ITH agregado.
+    """
     try:
         setle= setle_clean(asentamiento_name)
 
