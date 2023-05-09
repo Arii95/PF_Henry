@@ -123,7 +123,7 @@ Es importante aclarar que la cantidad de datos a lo largo del año varía depend
 
 <br/>
 
-Una vez teniendo la exploración inicial, se crearon funciones que realizan consultas a la base de datos extraida de MongoDB para conocer diferentes características del comportamiento del ganado durante el día y observar datos filtrados dependiendo del asentamiento, collar y en un tiempo en específico.
+Una vez teniendo la exploración inicial, proceso que se puede observar en el jupiter notebook de nombre __'ETL_datos.ipynb'__, se crearon funciones que realizan consultas a la base de datos extraida de MongoDB para conocer diferentes características del comportamiento del ganado durante el día y observar datos filtrados dependiendo del asentamiento, collar y en un tiempo en específico.
 
 A partir de esas funciones se construyó una API, una interfaz de programación, que provee al usuario la comodidad de realizar consultas a la base de datos. Las consultas arrojan datos en json que se disponibilizaron para acotar las necesidades de la empresa fueron:
 
@@ -141,14 +141,42 @@ A partir de esas funciones se construyó una API, una interfaz de programación,
 
 * Sexta consulta: La conducta de una vaca un día. 
 
-* Séptima: La conducta de la vaca en un periodo de tiempo. 
+* __Séptima consulta:__ La conducta de la vaca en un periodo de tiempo. 
 
-* Octava consulta: Días con más registros de una vaca en un establecimiento. 
+* __Octava consulta:__ Días con más registros de una vaca en un establecimiento. 
+
+<br/>
+
+Para reducción de información, se limitó el código de la API para solo mostrar las últimas dos consultas para tener un acceso directo a las consultas de interés y objetivos del trabajo: 
+
 
 
 <br/>
 
-![API](Imagenes/API.png)
+![API](Imagenes/API_Bastó.png)
+
+<br/>
+
+
+Los pasos a seguir para echar a andar la FastAPI teniendo el código clonado serían los siguientes: 
+
+1) Localizarse dentro de la carpeta de app dentro del repositorio con el comando en terminal: 
+    
+        cd app
+
+2) Una vez en la carpeta, en terminar se llama a la función de uvicorn de la siguiente forma: 
+
+        uvicorn main:app --reload
+
+3) Esto desplegará en terminal un deploy local con las consultas contenidas en el archivo main.py. Se debe dar click en el link que se produce y se visualizará en el explorador la API.
+
+4) Otra forma de realizarlo es descomentando la última parte del código y correrlo desde el archivo en sí. 
+
+Para realizar la consulta en el primer campo se debe poner el nombre del asentamiento a consultar, seguido del Id del collar de interés y la fecha con el siguiente formato: AAAA-MM-DD. Esto desplegará la consulta en formato json para su visualización y futura utilización.
+
+En la segunda consulta se obtiene la misma información solo que en un periodo de tiempo específico a considerar. El formato de fecha en ambos campos de inicio y fin se debe ingresar de la misma forma en la que se especificó previamente. 
+
+Sin embargo queda en el código de la API comentadas las otras consultas en dado caso de que sean utilizadas por el equipo de la empresa. 
 
 <br/>
 
@@ -156,7 +184,7 @@ En el siguiente link se puede observar el deploy de la visualización de las fun
 
 <br/>
 
-[Consultas BASTÓ](https://nestor1608-deploy-basto-streamlit-app-xiqp8y.streamlit.app/)
+[Consultas BASTÓ](https://nestor1608-prueba-mongo-deploy-app-56n56m.streamlit.app/Home)
 
 <br/>
 
@@ -164,18 +192,17 @@ En el siguiente link se puede observar el deploy de la visualización de las fun
 
 <br/>
 
-En la página podemos observar:
+En la página, en la pestaña de __'Home'__ podemos observar:
 
 * Los filtros por asentamientos, por collar por medio de sus identificadores directos en la base de datos.
 * Selección de la semana en la que se tienen registro. 
-* Selección del momento del día.
+* Selección del día de interés.
 
-Y dados esos filtros se muestra un mapa localizando las ubicaciones y los siguientes datos: 
+Y dados esos filtros se muestra un mapa localizando las ubicaciones y los siguientes datos del día especificado punto a punto de cada toma de datos de GPS: 
 
-* Distancia recorrida a lo largo del día
-* Mapa de la distancia recorrida 
-* Velocidad de movimiento en el pastoreo
-* Tiempo de pastoreo
+* Distancia recorrida.
+* Velocidad de movimiento.
+* Tiempo.
 
 <br/>
 
@@ -213,6 +240,16 @@ Para concluir, incluimos una tabla al final de diagnóstico en la que se mencion
 <br/>
 
 ![Diagnostico](Imagenes/diagnostico.png)
+
+<br/>
+
+El código utilizado para crear este deployment se encuentra en el siguiente repositorio: 
+
+[Streamlit](https://github.com/nestor1608/prueba_mongo_deploy)
+
+<br/>
+
+Para finalizar, queremos agradecer la oportunidad de poder trabajar en una empresa de este nivel y poder aportar al trabajo del manejo de los animales, procurando su bienestar y la mejora de los procesos alrededor de ellos. 
 
 <br/>
 
