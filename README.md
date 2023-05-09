@@ -129,6 +129,8 @@ A partir de esas funciones se construyó una API, una interfaz de programación,
 
 <br/>
 
+### __API__
+
 * Primer consulta: Informacion propia de una asentamiento.
 
 * Segunda consulta: Informacion propia de una asentamiento en un periodo de tiempo.
@@ -174,9 +176,11 @@ Los pasos a seguir para echar a andar la FastAPI teniendo el código clonado ser
 
 Para realizar la consulta en el primer campo se debe poner el nombre del asentamiento a consultar, seguido del Id del collar de interés y la fecha con el siguiente formato: AAAA-MM-DD. Esto desplegará la consulta en formato json para su visualización y futura utilización.
 
-En la segunda consulta se obtiene la misma información solo que en un periodo de tiempo específico a considerar. El formato de fecha en ambos campos de inicio y fin se debe ingresar de la misma forma en la que se especificó previamente. 
+En la segunda consulta se obtiene la misma información solo que en un periodo de tiempo específico a considerar. El formato de fecha en ambos campos de inicio y fin se debe ingresar de la misma forma en la que se especificó previamente. Sin embargo queda en el código de la API comentadas las otras consultas en dado caso de que sean utilizadas por el equipo de la empresa. 
 
-Sin embargo queda en el código de la API comentadas las otras consultas en dado caso de que sean utilizadas por el equipo de la empresa. 
+<br/>
+
+### __Streamlit__ 
 
 <br/>
 
@@ -248,6 +252,7 @@ El código utilizado para crear este deployment se encuentra en el siguiente rep
 [Streamlit](https://github.com/nestor1608/prueba_mongo_deploy)
 
 <br/>
+
 
 Para finalizar, queremos agradecer la oportunidad de poder trabajar en una empresa de este nivel y poder aportar al trabajo del manejo de los animales, procurando su bienestar y la mejora de los procesos alrededor de ellos. 
 
